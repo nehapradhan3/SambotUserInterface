@@ -5,202 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sambot- Dashboard</title>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/datepicker3.css" rel="stylesheet">
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet"> 
 <link href="css/styles.css" rel="stylesheet">
 
-<!--Icons-->
-<script src="js/lumino.glyphs.js"></script>
-
-<!--[if lt IE 9]>
-<script src="js/html5shiv.js"></script>
-<script src="js/respond.min.js"></script>
-<![endif]-->
-<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'></script>
-<!-- amCharts javascript sources -->
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
-
-<script type='text/javascript'>
-$(document).ready(function(){
-	//amkharts
-		AmCharts.makeChart("chartdiv",
-				{
-					"type": "serial",
-					"categoryField": "category",
-					"startDuration": 1,
-					"color": "#B15252",
-					"categoryAxis": {
-						"gridPosition": "start"
-					},
-					"trendLines": [],
-					"graphs": [
-						{
-							"balloonText": "[[title]] of [[category]]:[[value]]",
-							"bullet": "round",
-							"id": "AmGraph-1",
-							"title": "counts",
-							"valueField": "column-1"
-						}
-					],
-					"guides": [],
-					"valueAxes": [
-						{
-							"id": "ValueAxis-1",
-							"title": "User Count"
-						}
-					],
-					"allLabels": [],
-					"balloon": {},
-					"legend": {
-						"enabled": true,
-						"useGraphSettings": true
-					},
-					"titles": [
-						{
-							"id": "Title-1",
-							"size": 15,
-							"text": "Filter By Days" // needs to provide by backend
-						}
-					],
-					"dataProvider": [   // dyanmic in nature 
-						{
-							"category": " 1",
-							"column-1": 8,
-							
-						},
-						{
-							"category": " 2",
-							"column-1": 6,
-							
-						},
-						{
-							"category": " 3",
-							"column-1": 2,
-							
-						},
-						{
-							"category": " 4",
-							"column-1": 1,
-							
-						},
-						{
-							"category": " 5",
-							"column-1": 2,
-							
-						},
-						{
-							"category": " 6",
-							"column-1": 3,
-							
-						},
-						{
-							"category": "7",
-							"column-1": 6,
-							
-						}
-					]
-				}
-			);
-  var number= $(this).index();
-  $('.sec').hide().eq(number).show();
-  $(this).toggleClass('active inactive');
-  $('ul#navigation li').not(this).removeClass('active').addClass('inactive');
-
-  $('#by_day').click(function(){
-  	$("#show_charts >li").removeClass("active")
-  $(this).parent().addClass('active');
-	$.ajax({
-		 	  url: 'http:localhost:8080/samdashboard/UsersAskedPastThreeSevenAndThirtyDays',
-			//url: 'http:localhost:8080/samdashboard/getTotalUsersByDays?rom=2016-07-21T17:34:49.000Z&to=2016-11-21T17:34:49.000Z',	
-		 	  dataType:"json",
-		 	  contentType:"application/json",
-		 	  async: false,
-		  	 error: function() {
-		 	     $('#info').html('<p>An error has occurred</p>');
-		 	 },
-		  	 success: function(data){
-		  	 	// d = JSON.stringify(data);
-		  	 	console.log("xcxv", data)
-		  // 	 	var i=1;
-		  // 	 	var array = $.map(data, function(value,index) {
-		  // 	 		animated2Dbar('bar'+i,'#b13a3a',index,value);
-		  // 	 		i = i+1;
-
-				// });
-
-		  	 	// $("#data").html(d);
-		  	 },
-		   type: 'GET'
-		});
-
-  });
-
-    $('#by_month').click(function(){
-    	$("#show_charts >li").removeClass("active")
-    $(this).parent().addClass('active');
-	$.ajax({
-		 	  url: 'http:localhost:8080/samdashboard/UsersAskedPastThreeSevenAndThirtyDays',
-			//url: 'http:localhost:8080/samdashboard/getTotalUsersByDays?rom=2016-07-21T17:34:49.000Z&to=2016-11-21T17:34:49.000Z',	
-		 	  dataType:"json",
-		 	  contentType:"application/json",
-		 	  async: false,
-		  	 error: function() {
-		 	     $('#info').html('<p>An error has occurred</p>');
-		 	 },
-		  	 success: function(data){
-		  	 	// d = JSON.stringify(data);
-		  	 	var i=1;
-		  	 	var array = $.map(data, function(value,index) {
-		  	 		animated2Dbar('bar'+i,'#b13a3a',index,value);
-		  	 		i = i+1;
-
-				});
-
-		  	 	// $("#data").html(d);
-		  	 },
-		   type: 'GET'
-		});
-
-	});
-
-	$('#by_week').click(function(){
-		$("#show_charts >li").removeClass("active")
-	$(this).parent().addClass('active');
-	$.ajax({
-		 	  url: 'http:localhost:8080/samdashboard/UsersAskedPastThreeSevenAndThirtyDays',
-			//url: 'http:localhost:8080/samdashboard/getTotalUsersByDays?rom=2016-07-21T17:34:49.000Z&to=2016-11-21T17:34:49.000Z',	
-		 	  dataType:"json",
-		 	  contentType:"application/json",
-		 	  async: false,
-		  	 error: function() {
-		 	     $('#info').html('<p>An error has occurred</p>');
-		 	 },
-		  	 success: function(data){
-		  	 	// d = JSON.stringify(data);
-		  	 	var i=1;
-		  	 	var array = $.map(data, function(value,index) {
-		  	 		animated2Dbar('bar'+i,'#b13a3a',index,value);
-		  	 		i = i+1;
-
-				});
-
-		  	 	// $("#data").html(d);
-		  	 },
-		   type: 'GET'
-		});
-
-  });
-	// remove active class from others
-
-});
-
-
-</script>
-$('.sec').not('.first').hide();
-<script src="js/jquery.min.js"></script>
-<script src="js/graph.js"></script>
-<link href="css/main.css" rel="stylesheet" type="text/css" />
+<!-- <link href="css/main.css" rel="stylesheet" type="text/css" />/ -->
+<!--datepicker sources-->
+<!-- <link  src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'> -->
+<link src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/css/bootstrap-datetimepicker.min.css'>
+<link src='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
 </head>
 
@@ -238,16 +51,14 @@ $('.sec').not('.first').hide();
 		</form>
 		<ul class="nav menu">
 			<li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
-			<li><a href="widgets.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Widgets</a></li>
-			<li><a href="UserCountByPastThreeSevenThirty Days.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> User Count</a></li>
-			<li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Tables</a></li>
-			<li><a href="widgets.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> User Count</a></li>
-			<li><a href="UserCountByPastThreeSevenThirty Days.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Total Users</a></li>
-			<li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> User Count Daily Remainder</a></li>
-			<li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> User Count By Past N Days</a></li>
+			<li><a href="index.html"> User Count(Days,Months,Weeks)</a></li>
+			<li><a href="UCPastThreeSevenThirtyDays.html">User Count (Past three, seven and thirty days)</a></li>
+			<li><a href="UCPastNDays.html"> User Count (Past N days)</a></li>
+			<li><a href="UCDailyReminder.html">User Count Daily Reminder</a></li>
+			<li><a href="totalUsers.html">Total Users</a></li>
 			
-					
-			
+			<li><a href="charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> charts</a></li>
+				
 		</ul>
 
 	</div><!--/.sidebar-->
@@ -275,7 +86,7 @@ $('.sec').not('.first').hide();
 						</div>
 						<div class="col-sm-9 col-lg-7 widget-right">
 							<!-- <div class="large">120</div> -->
-							<div class="text-muted"><a href="index.html">UserCount Daily Reminder</a></div>
+							<div class="text-muted"><a href="UCDailyReminder.html">UserCount Daily Reminder</a></div>
 					  </div>
 					</div>
 				</div>
@@ -301,7 +112,7 @@ $('.sec').not('.first').hide();
 						</div>
 						<div class="col-sm-9 col-lg-7 widget-right">
 							<!-- <div class="large">24</div> -->
-							<div class="text-muted"><a href="index.html">Total Users</a></div>
+							<div class="text-muted"><a href="totalUsers.html">Total Users</a></div>
 					  </div>
 					</div>
 				</div>
@@ -322,39 +133,40 @@ $('.sec').not('.first').hide();
     <li class="active"><a class="button" id="by_day" href="#">By day</a></li>
     <li class="inactive"><a class="button" id="by_month" href="#">By Month</a></li>
     <li class="inactive"><a class="button" id="by_week" href="#">By week</a></li>
-
     </ul> -->
+    
     <nav>
     <ul class="nav nav-pills" id="show_charts">
-	    <li class="active"><a id="by_day">By day</a></li>
+	    <li><a id="by_day">By day</a></li>
 	    <li><a  id="by_month">By Month</a></li>
 	    <li><a  id="by_week">By week</a></li>
-		    <div class="input-group date">
-				<input type="text" class="form-control" value="12-02-2012">
-				<div class="input-group-addon">
-				    <span class="glyphicon glyphicon-th"></span>
-				</div>
-			</div>
-
-				
-		<!--   <li>
-		    <div class="input-group date">
-				<input type="text" class="form-control" value="12-02-2012">
-				<div class="input-group-addon">
-				    <span class="glyphicon glyphicon-th"></span>
-				</div>
-			</div>
-		</li> -->
+	    <br>
+	    <div class="container">
+    <div class="row">
+        <div class='col-sm-3'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+          <div class='col-sm-3'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker2'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+	    
+		  
    </ul>
 </nav>
-
-   
-        
-<!-- $('#menu li ul li').each(function(i, e){
-   $('<span class="arr"></span>')
-       .attr("id", "id_" + i)
-       .appendTo(this);
-}); -->
 
  		<div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
 
@@ -370,35 +182,90 @@ $('.sec').not('.first').hide();
 			
 			
 	</div>	<!--/.main-->
+	<!--Icons-->
+<script src="js/lumino.glyphs.js"></script>
+<script src="js/respond.min.js"></script>
 
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
+<!-- amCharts javascript sources -->
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+
+<!--javascript sources-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/js/bootstrap-datetimepicker.min.js"></script>
+
+	
 	<script>
-		$('#calendar').datepicker({
-		});
+$(document).ready(function(){
+  var backEndUrl ="http:localhost:8080/samdashboard";
+ var charTitle , chartData, chartSelector;
+    charTitle = "By Day";
+    chartSelector ="chartdiv";
+  //   chartData =[   // dyanmic in nature 
+		// 				{
+		// 					"category": " 1",
+		// 					"column-1": 8,
+							
+		// 				},
+		// 				{
+		// 					"category": " 2",
+		// 					"column-1": 6,
+							
+		// 				},
+		// 				{
+		// 					"category": " 3",
+		// 					"column-1": 2,
+							
+		// 				},
+		// 				{
+		// 					"category": " 4",
+		// 					"column-1": 1,
+							
+		// 				},
+		// 				{
+		// 					"category": " 5",
+		// 					"column-1": 2,
+							
+		// 				},
+		// 				{
+		// 					"category": " 6",
+		// 					"column-1": 3,
+							
+		// 				},
+		// 				{
+		// 					"category": "7",
+		// 					"column-1": 6,
+							
+		// 				}
+		// 			];
+  // // makeChart(chartSelector, charTitle, chartData);
+  var number= $(this).index();
+  $('.sec').hide().eq(number).show();
+  $(this).toggleClass('active inactive');
+  $('ul#navigation li').not(this).removeClass('active').addClass('inactive');
+// date function
 
-		!function ($) {
-		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
-		        $(this).find('em:first').toggleClass("glyphicon-minus");      
-		    }); 
-		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-		}(window.jQuery);
 
-		$(window).on('resize', function () {
-		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-		})
-		$(window).on('resize', function () {
-		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-		});
 
-		$(function(){
-			$.ajax({
-		 	  url: 'http:localhost:8080/samdashboard/UsersAskedPastThreeSevenAndThirtyDays',
+
+
+
+  $('#by_day').click(function(){
+  	$("#show_charts >li").removeClass("active")
+  $(this).parent().addClass('active');
+  var datetimepicker1 = $("#datetimepicker1>input").val(),
+       dateFrom = new Date(datetimepicker1).valueOf();
+   var datetimepicker2 = $("#datetimepicker2>input").val(),
+        dateTo = new Date(datetimepicker2).valueOf();
+   // console.log("datefrom", dateFrom, dateTo);
+   if(isNaN(dateFrom)|| isNaN(dateTo)){
+   		return;
+   }
+   // return;
+	$.ajax({
+		 	 url: backEndUrl+'/getTotalUsersByDays?from='+dateFrom+'&to='+dateTo,
 			//url: 'http:localhost:8080/samdashboard/getTotalUsersByDays?rom=2016-07-21T17:34:49.000Z&to=2016-11-21T17:34:49.000Z',	
 		 	  dataType:"json",
 		 	  contentType:"application/json",
@@ -407,53 +274,239 @@ $('.sec').not('.first').hide();
 		 	     $('#info').html('<p>An error has occurred</p>');
 		 	 },
 		  	 success: function(data){
+		  	 	 // console.log("drta", data, data.titles[0].text, data.dataProvider);
+		  	 
 		  	 	// d = JSON.stringify(data);
-		  	 	var i=1;
-		  	 	var array = $.map(data, function(value,index) {
+		  	 	// console.log("xcxv", data)
+		  	 	charTitle = data.titles[0].text;
+                chartSelector ="chartdiv";
+                chartData =data.dataProvider;
+                // chart.clear();
+                AmCharts.clear();
+                makeChart(chartSelector, charTitle, chartData);
+		  // 	 	var i=1;
+		  // 	 	var array = $.map(data, function(value,index) {
+		  // 	 		animated2Dbar('bar'+i,'#b13a3a',index,value);
+		  // 	 		i = i+1;
 
-		  	 		animated2Dbar('bar'+i,'#b13a3a',index,value);
-		  	 		i = i+1;
-
-				});
+				// });
 
 		  	 	// $("#data").html(d);
 		  	 },
 		   type: 'GET'
 		});
 
-	});
-		$(function(){
-				$('#by_day li a').click(function(){
-		      var t = $(this).attr('id');
+  });
 
-		      if(!$(this).hasClass('active')){ //this is the start of our condition 
+	 makeChart(chartSelector, charTitle, chartData);
+  var number= $(this).index();
+  $('.sec').hide().eq(number).show();
+  $(this).toggleClass('active inactive');
+  $('ul#navigation li').not(this).removeClass('active').addClass('inactive');
 
-		                    $('#by_day li a').removeClass('active').addClass('inactive');           
-		                    $(this).removeClass('inactive').addClass('active');
+    $('#by_month').click(function(){
+    	$("#show_charts >li").removeClass("active")
+    $(this).parent().addClass('active');
+    var datetimepicker1 = $("#datetimepicker1>input").val(),
+       dateFrom = new Date(datetimepicker1).valueOf();
+   	var datetimepicker2 = $("#datetimepicker2>input").val(),
+        dateTo = new Date(datetimepicker2).valueOf();
+         if(isNaN(dateFrom)|| isNaN(dateTo)){
+   				return;
+   			}
+   // console.log("datefrom", dateFrom, dateTo);
+   // return;
+	$.ajax({
+		 	  url: backEndUrl+'/getTotalUsersByMonths?from='+dateFrom+'&to='+dateTo,
+			//url: 'http:localhost:8080/samdashboard/getTotalUsersByDays?rom=2016-07-21T17:34:49.000Z&to=2016-11-21T17:34:49.000Z',	
+		 	  dataType:"json",
+		 	  contentType:"application/json",
+		 	  async: false,
+		  	 error: function() {
+		 	     $('#info').html('<p>An error has occurred</p>');
+		 	 },
+		  	  success: function(data){
+		  	 
+		  	 	// d = JSON.stringify(data);
+		  	 	// console.log("xcxv", data)
+		  	 	charTitle = "By Month clicks";
+                chartSelector ="chartdiv";
+                // chart.clear();
+                AmCharts.clear();
+                makeChart(chartSelector, charTitle, chartData);
+		  // 	 	var i=1;
+		  // 	 	var array = $.map(data, function(value,index) {
+		  // 	 		animated2Dbar('bar'+i,'#b13a3a',index,value);
+		  // 	 		i = i+1;
 
-		                    $('.tab-container').hide();
-		                    $('#'+ t + 'C').fadeIn('slow');
-		                 }
-		                }); 
+				// });
 
-		$(function() { $( ".button_active" ).click(function() {
-
-			$( ".activeTab" ).addClass("active");
-
-			return false; }); });
-
-			$(function() { $( ".button_inactive" ).click(function() {
-
-			$( ".activeTab" ).removeClass("active");
-
-			return false; }); 
+		  	 	// $("#data").html(d);
+		  	 },
+		   type: 'GET'
 		});
 
-		
+  });
 
 
+	 makeChart(chartSelector, charTitle, chartData);
+  var number= $(this).index();
+  $('.sec').hide().eq(number).show();
+  $(this).toggleClass('active inactive');
+  $('ul#navigation li').not(this).removeClass('active').addClass('inactive');
 
-	
+	$('#by_week').click(function(){
+		$("#show_charts >li").removeClass("active")
+	$(this).parent().addClass('active');
+	var datetimepicker1 = $("#datetimepicker1>input").val(),
+       dateFrom = new Date(datetimepicker1).valueOf();
+   var datetimepicker2 = $("#datetimepicker2>input").val(),
+        dateTo = new Date(datetimepicker2).valueOf();
+         if(isNaN(dateFrom)|| isNaN(dateTo)){
+   				return;
+   			}
+   // console.log("datefrom", dateFrom, dateTo);
+   // return;
+	$.ajax({
+		 	   url: backEndUrl+'/getTotalUsersByWeeks?from='+dateFrom+'&to='+dateTo,
+			//url: 'http:localhost:8080/samdashboard/getTotalUsersByDays?rom=2016-07-21T17:34:49.000Z&to=2016-11-21T17:34:49.000Z',	
+		 	  dataType:"json",
+		 	  contentType:"application/json",
+		 	  async: false,
+		  	 error: function() {
+		 	     $('#info').html('<p>An error has occurred</p>');
+		 	 },
+		  	 success: function(data){
+		  	 
+		  	 	// d = JSON.stringify(data);
+		  	 	// console.log("xcxv", data)
+		  	 	charTitle = "By Week clicks";
+                chartSelector ="chartdiv";
+                // chart.clear();
+                AmCharts.clear();
+                makeChart(chartSelector, charTitle, chartData);
+		  // 	 	var i=1;
+		  // 	 	var array = $.map(data, function(value,index) {
+		  // 	 		animated2Dbar('bar'+i,'#b13a3a',index,value);
+		  // 	 		i = i+1;
+
+				// });
+
+		  	 	// $("#data").html(d);
+		  	 },
+		   type: 'GET'
+		});
+
+  });
+			//date picker
+
+			$(function () {
+   var bindDatePicker = function() {
+		$(".date").datetimepicker({
+        format:'YYYY-MM-DD',
+			icons: {
+				time: "fa fa-clock-o",
+				date: "fa fa-calendar",
+				up: "fa fa-arrow-up",
+				down: "fa fa-arrow-down"
+			}
+		}).find('input:first').on("blur",function () {
+			// check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
+			// update the format if it's yyyy-mm-dd
+			var date = parseDate($(this).val());
+
+			if (! isValidDate(date)) {
+				//create date based on momentjs (we have that)
+				date = moment().format('YYYY-MM-DD');
+			}
+
+			$(this).val(date);
+		});
+	}
+   
+   var isValidDate = function(value, format) {
+		format = format || false;
+		// lets parse the date to the best of our knowledge
+		if (format) {
+			value = parseDate(value);
+		}
+
+		var timestamp = Date.parse(value);
+
+		return isNaN(timestamp) == false;
+   }
+   
+   var parseDate = function(value) {
+		var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
+		if (m)
+			value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
+
+		return value;
+   }
+   
+   bindDatePicker();
+ });
+
+	// remove active class from others
+	//chartdiv , "User Count", 
+	function makeChart(selector, title, data){
+			// debugger;
+			//amkharts
+		if( data === undefined){
+				return;
+			}
+		if(data.length <=0 ){
+			return;
+		}
+		var chart=  new AmCharts.makeChart(selector,
+				{
+					"type": "serial",
+					"categoryField": "category",
+					"startDuration": 1,
+					"color": "#B15252",
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"bullet": "round",
+							"id": "AmGraph-1",
+							"title": "counts",
+							"valueField": "column-1"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "User Count"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"useGraphSettings": true
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": title // needs to provide by backend
+						}
+					],
+					"dataProvider": data
+				}
+			);
+	}
+
+});
+
+
+</script>
+
 	</script>	
 </body>
 

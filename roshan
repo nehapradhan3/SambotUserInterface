@@ -1,0 +1,9 @@
+url :'http:localhost:8080/samdashboard/getTotalUsersByMonths?from=2017-1-1T10:00:00.000Z&to=2017-7-20T17:56:55.000Z',
+
+[3:58]  
+Object.keys(data).forEach(function(key){
+                console.log(key, "key....");
+                console.log(data[key], "---vale----");
+                $('#data').append("<h3><li>"+key+" = "+ data[key]+"</li></h3>")
+                
+              });
